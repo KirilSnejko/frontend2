@@ -22,46 +22,25 @@ const purchases = [
 ];
 
 const makePurchaseStat = (purchases) => {
-  const results = {
-    // total: 0,
-    // categories: {
-    //   Food: 0,
-    //   Clothing: 0,
-    //   Entertainment: 0,
-    // },
-    // month: {
-    //  Feb: 0,
-    //  Mar: 0,
-    //  Apr: 0,
-    //  Jun: 0,
-    //  Jul: 0,
-    // },
-  };
+  return purchases.reduce(
+    (sum, item) => {
+      sum.total += item.amount;
 
-  purchases.reduce((sum, item) => {
-    if (!results.total) {
-      results.total = 0;
-    }
-    results.total += item.amount;
+      if (!sum.categories[item.category]) {
+        sum.categories[item.category] = 0;
+      }
+      sum.categories[item.category] += item.amount;
 
-    if (!results.categories) {
-      results.categories = {};
-    }
-    if (!results.categories[item.category]) {
-      results.categories[item.category] = 0;
-    }
-    results.categories[item.category] += item.amount;
+      if (!sum.month[item.date]) {
+        sum.month[item.date] = 0;
+      }
+      sum.month[item.date] += item.amount;
 
-    if (!results.month) {
-      results.month = {};
-    }
-    if (!results.month[item.date]) {
-      results.month[item.date] = 0;
-    }
-    results.month[item.date] += item.amount;
-  });
+      return sum;
+    },
 
-  return results;
+    { total: 0, categories: {}, month: {} }
+  );
 };
 
 console.log(makePurchaseStat(purchases));
