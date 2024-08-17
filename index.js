@@ -21,12 +21,12 @@ Event.prototype.addParticipant = function (participant) {
 Event.prototype.listParticipants = function () {
   if (this.registeredParticipants.length === 0) {
     console.log("Participants have not yet been registered");
-    return;
+  } else {
+    console.log("List of participants:");
+    this.registeredParticipants.forEach((participant, index) => {
+      console.log(`${index + 1}. ${participant.name}`);
+    });
   }
-  console.log("List of participants:");
-  this.registeredParticipants.map((participant, index) => {
-    return console.log(`${index + 1} ${participant.name}`);
-  });
 };
 
 Event.prototype.findParticipantByEmail = function (eMail) {
@@ -61,8 +61,8 @@ birthDay.addParticipant(participant3);
 birthDay.listParticipants();
 newYear.listParticipants();
 
-birthDay.findParticipantByEmail("dawid@gmail.com");
-newYear.findParticipantByEmail("maksim@gmail.com");
+// birthDay.findParticipantByEmail("dawid@gmail.com");
+// newYear.findParticipantByEmail("maksim@gmail.com");
 
-console.log(birthDay);
-console.log(newYear);
+// console.log(birthDay);
+// console.log(newYear);
